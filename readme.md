@@ -19,3 +19,9 @@ https://github.com/amir-abdi/keras_to_tensorflow
 ------------------------------------------------------------
 若采用lite模型部署
 
+https://www.tensorflow.org/mobile/tflite/
+https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/lite
+https://github.com/tensorflow/tensorflow/blob/master/tensorflow/docs_src/mobile/tflite/demo_android.md
+https://blog.csdn.net/qq_35559358/article/details/79428963      ...还在整理中。
+https://www.zhihu.com/question/59994763/answer/260293934
+百度搜索 tensorflow lite
