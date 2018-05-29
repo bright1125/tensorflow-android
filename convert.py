@@ -1,5 +1,17 @@
 import tensorflow as tf
 from argparse import ArgumentParser
+import os
+
+def del_file(path):
+    ls = os.listdir(path)
+    for i in ls:
+        c_path = os.path.join(path, i)
+        if os.path.isdir(c_path):
+            del_file(c_path)
+        else:
+            os.remove(c_path)
+
+
 
 def main():
     parser = ArgumentParser()
@@ -18,7 +30,11 @@ def main():
     opts = parser.parse_args()
     tf.reset_default_graph()
     saver = tf.train.import_meta_graph(opts.model)
-    builder = tf.saved_model.builder.SavedModelBuilder(opts.out_path)
+    if os.path.exists(opts.out_path):
+        del_file(opts.out_path)        
+    else:
+        builder = tf.saved_model.builder.SavedModelBuilder(opts.out_path)
+
     with tf.Session() as sess:
         # Restore variables from disk.
         saver.restore(sess, opts.checkpoint)
