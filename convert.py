@@ -28,6 +28,7 @@ def main():
                         help='model output directory',
                         metavar='MODEL_OUT', required=True)
     opts = parser.parse_args()
+
     tf.reset_default_graph()
     saver = tf.train.import_meta_graph(opts.model)
     if os.path.exists(opts.out_path):
