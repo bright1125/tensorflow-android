@@ -1,15 +1,15 @@
 import tensorflow as tf
 from argparse import ArgumentParser
 import os
+import shutil
 
 def del_file(path):
-    ls = os.listdir(path)
-    for i in ls:
-        c_path = os.path.join(path, i)
-        if os.path.isdir(c_path):
-            del_file(c_path)
+    for i in os.listdir(path):
+        path_file = os.path.join(path, i)
+        if os.path.isfile(path_file):
+            os.remove(path_file)
         else:
-            os.remove(c_path)
+            del_file(path_file)
 
 
 
@@ -31,10 +31,13 @@ def main():
 
     tf.reset_default_graph()
     saver = tf.train.import_meta_graph(opts.model)
+
     if os.path.exists(opts.out_path):
-        del_file(opts.out_path)        
-    else:
-        builder = tf.saved_model.builder.SavedModelBuilder(opts.out_path)
+        path = opts.out_path
+        del_file(path)
+        shutil.rmtree(path)
+
+    builder = tf.saved_model.builder.SavedModelBuilder(opts.out_path)
 
     with tf.Session() as sess:
         # Restore variables from disk.
