@@ -11,6 +11,8 @@ def del_file(path):
         else:
             del_file(path_file)
 
+#os.environ['CUDA_VISIBLE_DEVICES']='2'  #GPU
+
 
 
 def main():
@@ -39,14 +41,16 @@ def main():
 
     builder = tf.saved_model.builder.SavedModelBuilder(opts.out_path)
 
-    with tf.Session() as sess:
+    with tf.Session(graph=tf.Graph()) as sess:
         # Restore variables from disk.
         saver.restore(sess, opts.checkpoint)
         print("Model restored.")
         builder.add_meta_graph_and_variables(sess,
                                        ['tfckpt2pb'],
+                                       signature_def_map = foo_signatures,
+                                       assets_collection = foo_assets
                                        strip_default_attrs=False)
-        builder.save()
+
 
 if __name__ == '__main__':
     main()
