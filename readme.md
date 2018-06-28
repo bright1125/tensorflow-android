@@ -16,6 +16,8 @@ https://github.com/r1cebank/tf-ckpt-2-pb中的方法得出的pb模型是用savem
 代码见ckpt2freeze-pb.py,具体的运行参考原参考文件：
 https://github.com/r1cebank/tf-ckpt-2-pb
 
+另外，tensorflow中，对于大批量数据可以转化为TFRecord，多线程异步（先后）读取
+代码见TFRecord.py
 
 2、keras_to_tensorflow：（未跑通）
 keras模型使用model.save('file_name.h5')保存为h5文件
