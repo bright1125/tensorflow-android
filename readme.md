@@ -4,7 +4,8 @@ Tensorflow部署android
 本文档主要讲述了其他非pb类文件转化为pb文件的方法。
 
 ----
-https://github.com/r1cebank/tf-ckpt-2-pb中的方法得出的pb模型是用savemodel方法得到的，而该方法得到的pb模型不能直接部署安卓。
+https://github.com/r1cebank/tf-ckpt-2-pb
+中的方法得出的pb模型是用savemodel方法得到的，而该方法得到的pb模型不能直接部署安卓。
 经过进一步探索，由于以下原因，确定解决方案为ckpt2freeze-pb.py，即从ckpt转为freezed（固定化）后的pb文件：
 - 1. 生成固定化的pb文件需要未固定化的pb文件也需要ckpt文件，
 - 2. ckpt文件可以生成未固定化的pb文件，
